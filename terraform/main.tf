@@ -12,16 +12,6 @@ resource "google_project_service" "default" {
     "serviceusage.googleapis.com",
     "identitytoolkit.googleapis.com",
     "storage.googleapis.com",
-    "notebooks.googleapis.com",
-    "compute.googleapis.com",
-    "dataflow.googleapis.com",
-    "datacatalog.googleapis.com",
-    "aiplatform.googleapis.com",
-    "visionai.googleapis.com",
-    "dataplex.googleapis.com",
-    "dataform.googleapis.com",
-    "component.googleapis.com",
-    "artifactregistry.googleapis.com",
   ])
   service            = each.key
   disable_on_destroy = false
