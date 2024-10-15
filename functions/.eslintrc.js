@@ -18,8 +18,8 @@ module.exports = {
     quotes: [`error`, `backtick`],
   },
   settings: {
-    'import/resolver': {
+    "import/resolver": {
       typescript: { project: `./` },
     },
   },
-}
+};
