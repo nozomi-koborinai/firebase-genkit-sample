@@ -49,6 +49,8 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+        working-directory: ./functions
 
       - name: Check for linting errors
         run: npm run lint
+        working-directory: ./functions
