@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "default": "firebase-genkit-sample"
+  },
+  "dataconnectEmulatorConfig": {
+    "postgres": {
+      "localConnectionString": "postgresql://localhost:5432?sslmode=disable"
+    }
+  }
+}
