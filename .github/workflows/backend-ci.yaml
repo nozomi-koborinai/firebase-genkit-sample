@@ -2,6 +2,8 @@ name: CI for Cloud Run Functions on Firebase
 
 on:
   pull_request:
+    paths:
+      - 'functions/**'
     types:
       - opened
       - synchronize
