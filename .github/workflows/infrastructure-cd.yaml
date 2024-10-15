@@ -1,0 +1,63 @@
+name: CD for Terraform Apply
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'terraform/**'
+
+jobs:
+  terraform-apply:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    timeout-minutes: 60
+    env:
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_TF }}
+      SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT_MAIL_TF }}
+      BILLING_ACCOUNT: ${{ secrets.BILLING_ACCOUNT }}
+      BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Check Terraform Format
+        run: terraform fmt -check -diff -recursive
+        working-directory: ./terraform
+
+      - name: Initialize Terraform
+        run: terraform init -input=false -backend-config="bucket=${{ env.BUCKET_NAME }}"
+        working-directory: ./terraform
+
+      - name: Run Terraform Plan
+        run: >
+          terraform plan 
+          -lock-timeout=120s 
+          -var=project_id=${{ env.PROJECT_ID }} 
+          -var=project_name=${{ env.PROJECT_ID }} 
+          -var=billing_account=${{ env.BILLING_ACCOUNT }} 
+        working-directory: ./terraform
+
+      - name: Run Terraform Apply
+        run: >
+          terraform apply -auto-approve 
+          -lock-timeout=120s 
+          -var=project_id=${{ env.PROJECT_ID }} 
+          -var=project_name=${{ env.PROJECT_ID }} 
+          -var=billing_account=${{ env.BILLING_ACCOUNT }} 
+        working-directory: ./terraform
