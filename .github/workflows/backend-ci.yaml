@@ -1,0 +1,54 @@
+name: CI for Cloud Run Functions on Firebase
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
+    timeout-minutes: 15
+    outputs:
+      genkit_functions: ${{ steps.filter.outputs.genkit_functions }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Detect changes
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            genkit_functions:
+              - 'functions/**'
+
+  functions_ci:
+    name: Cloud Run Functions CI
+    needs:
+      - changes
+    if: ${{ needs.changes.outputs.genkit_functions == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Check for linting errors
+        run: npm run lint
