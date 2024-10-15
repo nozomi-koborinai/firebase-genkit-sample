@@ -1,0 +1,65 @@
+name: CD for Cloud Run Functions on Firebase
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
+    timeout-minutes: 15
+    outputs:
+      genkit_functions: ${{ steps.filter.outputs.genkit_functions }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Detect changes
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            genkit_functions:
+              - 'functions/**'
+
+  deploy_functions:
+    name: Deploy Functions
+    needs:
+      - changes
+    if: ${{ needs.changes.outputs.genkit_functions == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    timeout-minutes: 60
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v1"
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_FB }}
+          service_account: ${{ secrets.SERVICE_ACCOUNT_MAIL_FB }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./functions
+
+      - name: Deploy to Functions
+        run: |
+          npm install -g firebase-tools
+          firebase deploy --only functions --force --project=${{ secrets.PROJECT_ID }}
+        working-directory: ./functions
