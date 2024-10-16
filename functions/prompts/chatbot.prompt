@@ -17,7 +17,7 @@ input:
     productCatalog(array):
       id: string
       name: string
-      description: string
+      details: string
       price: number
 output:
   format: json
