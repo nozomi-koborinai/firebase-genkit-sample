@@ -6,24 +6,24 @@ input:
   schema:
     userId: string
     currentQuery: string
-    chatHistory:
-      - role: string
-        content: string
-        timestamp: string
+    chatHistory(array):
+      role: string
+      content: string
+      timestamp: string
     userProfile:
       name: string
       preferredLanguage: string
       accountType: string
-    productCatalog:
-      - id: string
-        name: string
-        description: string
-        price: number
+    productCatalog(array):
+      id: string
+      name: string
+      description: string
+      price: number
 output:
   format: json
   schema:
     response: string
-    suggestedActions: array
+    suggestedActions(array): string
     sentiment: string
 ---
 
