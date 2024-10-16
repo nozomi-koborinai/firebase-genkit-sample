@@ -6,7 +6,6 @@ import { googleAI } from '@genkit-ai/googleai'
 import { vertexAI } from '@genkit-ai/vertexai'
 import * as admin from 'firebase-admin'
 import { defineSecret } from 'firebase-functions/params'
-import * as z from 'zod'
 
 configureGenkit({
   plugins: [firebase(), vertexAI(), googleAI({ apiVersion: `v1beta` }), dotprompt(), googleCloud()],
@@ -19,10 +18,6 @@ configureGenkit({
 })
 
 admin.initializeApp()
-
-export const getPunishmentSchema = z.object({
-  existingPunishments: z.array(z.string()),
-})
 
 export const db = admin.firestore()
 
