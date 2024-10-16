@@ -1,14 +1,123 @@
-# Firestore のマスタデータ管理　(アプリケーション設定)
+# Firestore のマスタデータ管理　(アプリケーション設定と Genkit 参照用のサンプルデータ)
 locals {
-  # Firestore master data (アプリケーション設定)
   docs = [
+    # アプリケーション設定
+    # 今回は、Genkit を意図しない使用を防ぐために有効無効フラグを用意している
     {
       collection  = "appConf"
       document_id = "config"
       fields = jsonencode({
-        "genkitEnabled" = { "booleanValue" = false }
+        "genkitEnabled" = { "booleanValue" = true }
       })
     },
+
+    # チャットボットを使用するダミーユーザー
+    # functions/src/genkit-functions が実際に参照する Firestore データ
+    {
+      collection  = "users"
+      document_id = "user123"
+      fields = jsonencode({
+        "userProfile" = {
+          "mapValue" = {
+            "fields" = {
+              "name" = { "stringValue" = "田中太郎" }
+              "preferredLanguage" = { "stringValue" = "ja" }
+              "accountType" = { "stringValue" = "premium" }
+            }
+          }
+        }
+      })
+    },
+    {
+      collection  = "users"
+      document_id = "user456"
+      fields = jsonencode({
+        "userProfile" = {
+          "mapValue" = {
+            "fields" = {
+              "name" = { "stringValue" = "田中次郎" }
+              "preferredLanguage" = { "stringValue" = "ja" }
+              "accountType" = { "stringValue" = "standard" }
+            }
+          }
+        }
+      })
+    },
+
+    # ユーザーのチャット履歴
+    {
+      collection  = "users/user123/chatHistory"
+      document_id = "chat123"
+      fields = jsonencode({
+        "productId" = { "stringValue" = "tablet_1" },
+        "messages" = {
+          "arrayValue" = {
+            "values" = [
+              {
+                "mapValue" = {
+                  "fields" = {
+                    "role" = { "stringValue" = "user" }
+                    "content" = { "stringValue" = "7 インチタブレットの大きさはどれくらいなのでしょうか？" }
+                    "timestamp" = { "stringValue" = "2024-04-20T10:00:00Z" }
+                  }
+                }
+              },
+              {
+                "mapValue" = {
+                  "fields" = {
+                    "role" = { "stringValue" = "assistant" }
+                    "content" = { "stringValue" = "7インチタブレットの大きさは、画面の対角線の長さが7インチ（約17.78 cm）であることを指します。" }
+                    "timestamp" = { "stringValue" = "2024-04-20T10:00:05Z" }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      })
+    },
+    {
+      collection  = "users/user456/chatHistory"
+      document_id = "chat456"
+      fields = jsonencode({
+        "productId" = { "stringValue" = "tablet_1" },
+        "messages" = {
+          "arrayValue" = {
+            "values" = [
+              {
+                "mapValue" = {
+                  "fields" = {
+                    "role" = { "stringValue" = "user" }
+                    "content" = { "stringValue" = "こんにちは" }
+                    "timestamp" = { "stringValue" = "2023-04-20T10:00:00Z" }
+                  }
+                }
+              },
+              {
+                "mapValue" = {
+                  "fields" = {
+                    "role" = { "stringValue" = "assistant" }
+                    "content" = { "stringValue" = "はい、どのようなご質問でしょうか？" }
+                    "timestamp" = { "stringValue" = "2023-04-20T10:00:05Z" }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      })
+    },
+
+    # 商品マスタ
+    {
+      collection  = "productCatalog"
+      document_id = "tablet_1"
+      fields = jsonencode({
+        "name" = { "stringValue" = "タブレット_1" }
+        "details" = { "stringValue" = "軽量 7 インチタブレット" }
+        "price" = { "integerValue" = "30000" }
+      })
+    }
   ]
 }
 
