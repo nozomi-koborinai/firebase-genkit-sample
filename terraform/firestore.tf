@@ -20,9 +20,9 @@ locals {
         "userProfile" = {
           "mapValue" = {
             "fields" = {
-              "name" = { "stringValue" = "田中太郎" }
+              "name"              = { "stringValue" = "田中太郎" }
               "preferredLanguage" = { "stringValue" = "ja" }
-              "accountType" = { "stringValue" = "premium" }
+              "accountType"       = { "stringValue" = "premium" }
             }
           }
         }
@@ -35,9 +35,9 @@ locals {
         "userProfile" = {
           "mapValue" = {
             "fields" = {
-              "name" = { "stringValue" = "田中次郎" }
+              "name"              = { "stringValue" = "田中次郎" }
               "preferredLanguage" = { "stringValue" = "ja" }
-              "accountType" = { "stringValue" = "standard" }
+              "accountType"       = { "stringValue" = "standard" }
             }
           }
         }
@@ -56,8 +56,8 @@ locals {
               {
                 "mapValue" = {
                   "fields" = {
-                    "role" = { "stringValue" = "user" }
-                    "content" = { "stringValue" = "7 インチタブレットの大きさはどれくらいなのでしょうか？" }
+                    "role"      = { "stringValue" = "user" }
+                    "content"   = { "stringValue" = "7 インチタブレットの大きさはどれくらいなのでしょうか？" }
                     "timestamp" = { "stringValue" = "2024-04-20T10:00:00Z" }
                   }
                 }
@@ -65,8 +65,8 @@ locals {
               {
                 "mapValue" = {
                   "fields" = {
-                    "role" = { "stringValue" = "assistant" }
-                    "content" = { "stringValue" = "7インチタブレットの大きさは、画面の対角線の長さが7インチ（約17.78 cm）であることを指します。" }
+                    "role"      = { "stringValue" = "assistant" }
+                    "content"   = { "stringValue" = "7インチタブレットの大きさは、画面の対角線の長さが7インチ（約17.78 cm）であることを指します。" }
                     "timestamp" = { "stringValue" = "2024-04-20T10:00:05Z" }
                   }
                 }
@@ -87,8 +87,8 @@ locals {
               {
                 "mapValue" = {
                   "fields" = {
-                    "role" = { "stringValue" = "user" }
-                    "content" = { "stringValue" = "こんにちは" }
+                    "role"      = { "stringValue" = "user" }
+                    "content"   = { "stringValue" = "こんにちは" }
                     "timestamp" = { "stringValue" = "2023-04-20T10:00:00Z" }
                   }
                 }
@@ -96,8 +96,8 @@ locals {
               {
                 "mapValue" = {
                   "fields" = {
-                    "role" = { "stringValue" = "assistant" }
-                    "content" = { "stringValue" = "はい、どのようなご質問でしょうか？" }
+                    "role"      = { "stringValue" = "assistant" }
+                    "content"   = { "stringValue" = "はい、どのようなご質問でしょうか？" }
                     "timestamp" = { "stringValue" = "2023-04-20T10:00:05Z" }
                   }
                 }
@@ -113,9 +113,9 @@ locals {
       collection  = "productCatalog"
       document_id = "tablet_1"
       fields = jsonencode({
-        "name" = { "stringValue" = "タブレット_1" }
+        "name"    = { "stringValue" = "タブレット_1" }
         "details" = { "stringValue" = "軽量 7 インチタブレット" }
-        "price" = { "integerValue" = "30000" }
+        "price"   = { "integerValue" = "30000" }
       })
     }
   ]
