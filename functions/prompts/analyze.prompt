@@ -1,0 +1,15 @@
+---
+model: googleai/gemini-1.5-flash-latest
+config:
+  temperature: 1.0
+input:
+  schema:
+    storageFileUrl: string
+output:
+  format: json
+  schema:
+    analysis: string
+---
+
+この画像の内容を詳しく説明し、その主要な特徴を要約してください。
+{{media url=storageFileUrl}}

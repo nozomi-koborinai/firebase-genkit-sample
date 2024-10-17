@@ -1,0 +1,13 @@
+---
+model: vertexai/imagen3
+config:
+  temperature: 0.7
+input:
+  schema:
+    prompt: string
+output:
+  format: media
+---
+
+あなたは世界一のイラストレーターです。
+{{prompt}} の画像を生成してください。
