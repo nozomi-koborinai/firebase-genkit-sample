@@ -1,3 +1,5 @@
+import { defineTool } from '@genkit-ai/ai'
+import * as cheerio from 'cheerio'
 import * as z from 'zod'
 import { db } from '../config/firebase'
 import { chatbotInputSchema } from '../schemas/chatbotInputSchema'
@@ -6,6 +8,25 @@ export async function isGenkitEnabled(): Promise<boolean> {
   const appConfDoc = await db.collection(`appConf`).doc(`config`).get()
   return appConfDoc.data()?.genkitEnabled ?? false
 }
+
+export const webLoader = defineTool(
+  {
+    name: `webLoader`,
+    description: `指定されたURLにアクセスし、ウェブページの内容を取得します。`,
+    inputSchema: z.object({ url: z.string().url() }),
+    outputSchema: z.string(),
+  },
+  async ({ url }) => {
+    const res = await fetch(url)
+    const html = await res.text()
+    const $ = cheerio.load(html)
+    $(`script, style, noscript`).remove()
+    if ($(`article`).length) {
+      return $(`article`).text()
+    }
+    return $(`body`).text()
+  }
+)
 
 export function createChatbotInput(
   userId: string,
