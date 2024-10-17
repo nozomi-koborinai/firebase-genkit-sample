@@ -6,7 +6,7 @@ import * as config from '../config/firebase'
 import { db } from '../config/firebase'
 import { chatbotInputSchema } from '../schemas/chatbotInputSchema'
 import { chatbotOutputSchema } from '../schemas/chatbotOutputSchema'
-import { isGenkitEnabled } from '../utils/genkitUtils'
+import { createChatbotInput, isGenkitEnabled } from '../utils/genkitUtils'
 
 export const anonymousFirestoreChatbot = genkitFunctions.onFlow(
   {
@@ -53,37 +53,3 @@ export const anonymousFirestoreChatbot = genkitFunctions.onFlow(
     }
   }
 )
-
-function createChatbotInput(
-  userId: string,
-  currentQuery: string,
-  userData: any,
-  chatData: any,
-  productData: any
-): z.infer<typeof chatbotInputSchema> {
-  return {
-    userId,
-    currentQuery,
-    chatHistory:
-      chatData?.messages?.map((message: any) => ({
-        role: message.role as `user` | `assistant`,
-        content: message.content,
-        timestamp: message.timestamp,
-      })) || [],
-    userProfile: {
-      name: userData?.userProfile?.name || ``,
-      preferredLanguage: userData?.userProfile?.preferredLanguage || ``,
-      accountType: userData?.userProfile?.accountType || ``,
-    },
-    productCatalog: productData
-      ? [
-          {
-            id: productData.id || ``,
-            name: productData.name || ``,
-            details: productData.details || ``,
-            price: productData.price || 0,
-          },
-        ]
-      : [],
-  }
-}
