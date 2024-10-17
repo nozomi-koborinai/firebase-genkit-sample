@@ -1,9 +1,9 @@
+import { prompt } from '@genkit-ai/dotprompt'
 import * as genkitFunctions from '@genkit-ai/firebase/functions'
 import * as z from 'zod'
-import { isGenkitEnabled } from '../utils/genkitUtils'
-import { prompt } from '@genkit-ai/dotprompt'
 import { analyzeStorageInputSchema } from '../schemas/analyzeStorageInputSchema'
 import { analyzeStorageOutputSchema } from '../schemas/analyzeStorageOutputSchema'
+import { isGenkitEnabled } from '../utils/genkitUtils'
 
 // Cloud Storage からファイルを読み込み、Gemini Flash 1.5 で要約する関数
 export const analyzeStorageImage = genkitFunctions.onFlow(
@@ -21,7 +21,7 @@ export const analyzeStorageImage = genkitFunctions.onFlow(
 
     const analyzeFilePrompt = await prompt<z.infer<typeof analyzeStorageInputSchema>>(`analyze`)
     const result = await analyzeFilePrompt.generate({ input })
-    
+
     return result.output()
   }
 )
