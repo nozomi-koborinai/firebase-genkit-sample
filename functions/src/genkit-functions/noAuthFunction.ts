@@ -5,7 +5,6 @@ import * as config from '../config/firebase'
 import { chatbotInputSchema } from '../schemas/chatbotInputSchema'
 import { chatbotOutputSchema } from '../schemas/chatbotOutputSchema'
 
-// 認証なしの Genkit Functions
 export const noAuthFunction = genkitFunctions.onFlow(
   {
     name: `noAuthFunction`,

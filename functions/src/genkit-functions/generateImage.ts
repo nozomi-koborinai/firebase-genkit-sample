@@ -4,7 +4,6 @@ import * as z from 'zod'
 import { googleAIapiKey } from '../config/firebase'
 import { generateImageInputSchema } from '../schemas/generateImageInputSchema'
 
-// 画像出力の Genkit Functions
 export const generateImage = genkitFunctions.onFlow(
   {
     name: `generateImage`,

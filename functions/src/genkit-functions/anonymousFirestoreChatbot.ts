@@ -6,7 +6,7 @@ import * as config from '../config/firebase'
 import { db } from '../config/firebase'
 import { chatbotInputSchema } from '../schemas/chatbotInputSchema'
 import { chatbotOutputSchema } from '../schemas/chatbotOutputSchema'
-import { createChatbotInput, isGenkitEnabled } from '../utils/genkitUtils'
+import { createChatbotInput } from '../utils/genkitUtils'
 
 export const anonymousFirestoreChatbot = genkitFunctions.onFlow(
   {
@@ -23,13 +23,11 @@ export const anonymousFirestoreChatbot = genkitFunctions.onFlow(
     outputSchema: chatbotOutputSchema,
     authPolicy: firebaseAuth((user) => {
       if (user.firebase?.sign_in_provider !== `anonymous`) {
-        throw new Error(`匿名認証されたユーザーのみがアクセスできます`)
+        throw new Error(`Only anonymously authenticated users can access this function`)
       }
     }),
   },
   async (input) => {
-    if (!(await isGenkitEnabled())) throw new Error(`Genkit が無効になっています。`)
-
     const userDoc = await db.collection(`users`).doc(input.userId).get()
     const userData = userDoc.data()
 
