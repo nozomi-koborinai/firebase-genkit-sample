@@ -1,7 +1,7 @@
 import { prompt } from '@genkit-ai/dotprompt'
 import * as genkitFunctions from '@genkit-ai/firebase/functions'
 import * as z from 'zod'
-import * as config from '../config/firebase'
+import { googleAIapiKey } from '../config/firebase'
 import { chatbotInputSchema } from '../schemas/chatbotInputSchema'
 import { chatbotOutputSchema } from '../schemas/chatbotOutputSchema'
 
@@ -10,7 +10,7 @@ export const noAuthFunction = genkitFunctions.onFlow(
     name: `noAuthFunction`,
     httpsOptions: {
       cors: true,
-      secrets: [config.googleAIapiKey],
+      secrets: [googleAIapiKey],
     },
     authPolicy: genkitFunctions.noAuth(),
     inputSchema: chatbotInputSchema,

@@ -2,8 +2,7 @@ import { prompt } from '@genkit-ai/dotprompt'
 import { firebaseAuth } from '@genkit-ai/firebase/auth'
 import * as genkitFunctions from '@genkit-ai/firebase/functions'
 import * as z from 'zod'
-import * as config from '../config/firebase'
-import { db } from '../config/firebase'
+import { db, googleAIapiKey } from '../config/firebase'
 import { chatbotInputSchema } from '../schemas/chatbotInputSchema'
 import { chatbotOutputSchema } from '../schemas/chatbotOutputSchema'
 import { createChatbotInput } from '../utils/genkitUtils'
@@ -13,7 +12,7 @@ export const anonymousFirestoreChatbot = genkitFunctions.onFlow(
     name: `anonymousFirestoreChatbot`,
     httpsOptions: {
       cors: true,
-      secrets: [config.googleAIapiKey],
+      secrets: [googleAIapiKey],
     },
     inputSchema: z.object({
       userId: z.string(),
