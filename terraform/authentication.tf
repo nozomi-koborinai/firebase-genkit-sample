@@ -1,4 +1,4 @@
-# Firebase Authentication のプロビジョニング
+# Provisioning Firebase Authentication
 resource "google_identity_platform_config" "default" {
   provider = google-beta
   project  = var.project_id
@@ -7,8 +7,8 @@ resource "google_identity_platform_config" "default" {
   ]
 }
 
-# Firebase Authentication が依存する Identity Platform のプロビジョニング
-# 今回は匿名認証のみ有効化
+# Provisioning Identity Platform which Firebase Authentication depends on
+# Only anonymous authentication is enabled for this configuration
 resource "google_identity_platform_project_default_config" "default" {
   provider = google-beta
   project  = var.project_id

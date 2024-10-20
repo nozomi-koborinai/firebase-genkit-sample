@@ -1,4 +1,4 @@
-# プロジェクトのデフォルトの Cloud Storage バケットを Google App Engine でプロビジョニング
+# Provision the project's default Cloud Storage bucket using Google App Engine
 resource "google_app_engine_application" "default" {
   provider    = google-beta
   project     = var.project_id
@@ -9,7 +9,7 @@ resource "google_app_engine_application" "default" {
   ]
 }
 
-# デフォルトの Storage バケットを Firebase SDKs, Firebase Authentication, Firebase Security Rules でアクセス可能にする
+# Make the default Storage bucket accessible to Firebase SDKs, Firebase Authentication, and Firebase Security Rules
 resource "google_firebase_storage_bucket" "default-bucket" {
   provider  = google-beta
   project   = var.project_id
@@ -20,7 +20,7 @@ resource "google_firebase_storage_bucket" "default-bucket" {
   ]
 }
 
-# ローカルファイルから Cloud Storage Security Rules のルールセットを作成
+# Create Cloud Storage Security Rules ruleset from local file
 resource "google_firebaserules_ruleset" "storage" {
   provider = google-beta
   project  = var.project_id
@@ -35,14 +35,14 @@ resource "google_firebaserules_ruleset" "storage" {
     create_before_destroy = true
   }
 
-  # デフォルトの Storage バケットがプロビジョニングされる前にこのルールセットを作成する前に待つ
+  # Wait for the default Storage bucket to be provisioned before creating this ruleset
   depends_on = [
     google_firebase_project.default,
     google_app_engine_application.default,
   ]
 }
 
-# ルールセットをデフォルトの Storage バケットにリリース
+# Release ruleset to the default Storage bucket
 resource "google_firebaserules_release" "default-bucket" {
   provider     = google-beta
   name         = "firebase.storage/${google_app_engine_application.default.default_bucket}"

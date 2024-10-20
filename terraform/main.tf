@@ -1,4 +1,4 @@
-# 必要な API を有効化
+# Enable necessary APIs
 resource "google_project_service" "default" {
   provider = google-beta.no_user_project_override
   project  = var.project_id
@@ -17,12 +17,12 @@ resource "google_project_service" "default" {
   disable_on_destroy = false
 }
 
-# 上記で作成した新しいプロジェクトに Firebase サービスを有効化
+# Enable Firebase services for the newly created project above
 resource "google_firebase_project" "default" {
   provider = google-beta
   project  = var.project_id
 
-  # 必要な API が有効化されるまで待つ
+  # Wait for the necessary APIs to be enabled
   depends_on = [
     google_project_service.default
   ]

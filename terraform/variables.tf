@@ -1,14 +1,14 @@
 variable "billing_account" {
-  description = "Firebase プロジェクトに紐づける Google Cloud Billing Account の ID"
+  description = "ID of the Google Cloud Billing Account to associate with the Firebase project"
   type        = string
 }
 
 variable "project_name" {
-  description = "Firebase プロジェクトの名前"
+  description = "Name of the Firebase project"
   type        = string
 }
 
 variable "project_id" {
-  description = "Firebase プロジェクト の ID"
+  description = "ID of the Firebase project"
   type        = string
 }

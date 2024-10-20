@@ -1,8 +1,7 @@
-# Firestore のマスタデータ管理　(アプリケーション設定と Genkit 参照用のサンプルデータ)
+# Firestore master data management (Application settings and sample data for Genkit reference)
 locals {
   docs = [
-    # アプリケーション設定
-    # 今回は、Genkit を意図しない使用を防ぐために有効無効フラグを用意している
+    # Application settings
     {
       collection  = "appConf"
       document_id = "config"
@@ -11,8 +10,8 @@ locals {
       })
     },
 
-    # チャットボットを使用するダミーユーザー
-    # functions/src/genkit-functions が実際に参照する Firestore データ
+    # Dummy users for chatbot interaction
+    # Firestore data actually referenced by functions/src/genkit-functions
     {
       collection  = "users"
       document_id = "user123"
@@ -44,7 +43,7 @@ locals {
       })
     },
 
-    # ユーザーのチャット履歴
+    # User chat history
     {
       collection  = "users/user123/chatHistory"
       document_id = "chat123"
@@ -108,7 +107,7 @@ locals {
       })
     },
 
-    # 商品マスタ
+    # Product catalog
     {
       collection  = "productCatalog"
       document_id = "tablet_1"
@@ -121,7 +120,7 @@ locals {
   ]
 }
 
-# Firestore データベースのプロビジョニング
+# Provisioning Firestore database
 resource "google_firestore_database" "firestore" {
   provider         = google-beta
   project          = var.project_id
@@ -130,13 +129,13 @@ resource "google_firestore_database" "firestore" {
   type             = "FIRESTORE_NATIVE"
   concurrency_mode = "OPTIMISTIC"
 
-  # Firebase が Google Cloud プロジェクトで有効になる前に Firestore を初期化する前に待つ
+    # Wait for Firebase to be enabled in the Google Cloud project before initializing Firestore
   depends_on = [
     google_firebase_project.default,
   ]
 }
 
-# Firestore のセキュリティルールをローカルファイルから作成
+# Create Firestore security rules from local file
 resource "google_firebaserules_ruleset" "firestore" {
   provider = google-beta
   project  = var.project_id
@@ -151,26 +150,26 @@ resource "google_firebaserules_ruleset" "firestore" {
     create_before_destroy = true
   }
 
-  # Firestore がプロビジョニングされる前にこのルールセットを作成する前に待つ
+  # Wait for Firestore to be provisioned before creating this ruleset
   depends_on = [
     google_firestore_database.firestore,
   ]
 }
 
-# Firestore インスタンスのルールセットを解放
+# Release ruleset for Firestore instance
 resource "google_firebaserules_release" "firestore" {
   provider     = google-beta
   name         = "cloud.firestore"
   ruleset_name = google_firebaserules_ruleset.firestore.name
   project      = var.project_id
 
-  # Firestore がプロビジョニングされる前にこのルールセットを解放する前に待つ
+  # Wait for Firestore to be provisioned before releasing this ruleset
   depends_on = [
     google_firestore_database.firestore,
   ]
 }
 
-# Firestore にマスタデータを追加
+# Add master data to Firestore
 resource "google_firestore_document" "docs" {
   for_each    = { for doc in local.docs : doc.document_id => doc }
   provider    = google-beta
@@ -185,7 +184,7 @@ resource "google_firestore_document" "docs" {
 }
 
 # Firebase Firestore Index
-# 今後書くコレクションのインデックスを定義する場合はコメントアウトを外して適宜編集してください
+# To define indexes for future collections, uncomment and edit as needed
 # resource "google_firestore_index" "user-index" {
 #   project = var.project_id
 #   collection = "user"
