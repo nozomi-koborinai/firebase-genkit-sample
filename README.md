@@ -1,6 +1,6 @@
 # firebase-genkit-sample
 
-Article: https://zenn.dev/nozomi_cobo/articles/
+Article: https://zenn.dev/nozomi_cobo/articles/genkit-architecture
 
 ## Directory Structure
 
