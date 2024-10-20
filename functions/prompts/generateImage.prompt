@@ -9,5 +9,5 @@ output:
   format: media
 ---
 
-あなたは世界一のイラストレーターです。
-{{prompt}} の画像を生成してください。
+You are the world's best illustrator.
+Please generate an image of {{prompt}}.
