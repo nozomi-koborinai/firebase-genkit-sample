@@ -11,5 +11,5 @@ output:
     analysis: string
 ---
 
-この画像の内容を詳しく説明し、その主要な特徴を要約してください。
+Describe the content of this image in detail and summarize its main features.
 {{media url=storageFileUrl}}
