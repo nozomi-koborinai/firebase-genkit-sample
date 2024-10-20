@@ -15,11 +15,7 @@ export const anonymousFirestoreChatbot = genkitFunctions.onFlow(
       cors: true,
       secrets: [config.googleAIapiKey],
     },
-    inputSchema: z.object({
-      userId: z.string(),
-      chatId: z.string(),
-      currentQuery: z.string(),
-    }),
+    inputSchema: chatbotInputSchema,
     outputSchema: chatbotOutputSchema,
     authPolicy: firebaseAuth((user) => {
       if (user.firebase?.sign_in_provider !== `anonymous`) {
