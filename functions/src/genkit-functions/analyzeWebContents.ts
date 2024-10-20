@@ -1,8 +1,8 @@
 import { generate } from '@genkit-ai/ai'
 import * as genkitFunctions from '@genkit-ai/firebase/functions'
 import { gemini15Flash } from '@genkit-ai/googleai'
+import * as z from 'zod'
 import { googleAIapiKey } from '../config/firebase'
-import { analyzeWebInputSchema } from '../schemas/analyzeWebInputSchema'
 import { webLoader } from '../utils/genkitUtils'
 
 export const analyzeWebContents = genkitFunctions.onFlow(
@@ -12,7 +12,8 @@ export const analyzeWebContents = genkitFunctions.onFlow(
       cors: true,
       secrets: [googleAIapiKey],
     },
-    inputSchema: analyzeWebInputSchema,
+    inputSchema: z.string(),
+    outputSchema: z.string(),
     authPolicy: genkitFunctions.noAuth(),
   },
   async (input) => {
@@ -20,9 +21,6 @@ export const analyzeWebContents = genkitFunctions.onFlow(
       model: gemini15Flash,
       prompt: `Analyze the content of the following webpage: ${input}`,
       tools: [webLoader],
-      output: {
-        format: `text`,
-      },
     })
 
     return result.text()
