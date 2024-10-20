@@ -1,4 +1,4 @@
-# Terraform のプロバイダをバージョンごとに設定
+# Configure Terraform providers with specific versions
 terraform {
   required_providers {
     google-beta = {
@@ -8,14 +8,14 @@ terraform {
   }
 }
 
-# プロバイダを設定して、リソースブロックで指定されたプロジェクトを使用してクォータチェックを行う
+# Configure provider to perform quota checks using the project specified in resource blocks
 provider "google-beta" {
   user_project_override = true
   billing_project       = var.project_id
 }
 
-# プロバイダを設定して、リソースブロックで指定されたプロジェクトを使用してクォータチェックを行わない
-# このプロバイダはプロジェクト作成時とサービス初期化時にのみ使用する
+# Configure provider to not perform quota checks using the project specified in resource blocks
+# This provider is used only for project creation and service initialization
 provider "google-beta" {
   alias                 = "no_user_project_override"
   user_project_override = false

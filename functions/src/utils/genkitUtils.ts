@@ -1,18 +1,12 @@
 import { defineTool } from '@genkit-ai/ai'
 import * as cheerio from 'cheerio'
 import * as z from 'zod'
-import { db } from '../config/firebase'
 import { chatbotInputSchema } from '../schemas/chatbotInputSchema'
-
-export async function isGenkitEnabled(): Promise<boolean> {
-  const appConfDoc = await db.collection(`appConf`).doc(`config`).get()
-  return appConfDoc.data()?.genkitEnabled ?? false
-}
 
 export const webLoader = defineTool(
   {
     name: `webLoader`,
-    description: `指定されたURLにアクセスし、ウェブページの内容を取得します。`,
+    description: `Accesses the specified URL and retrieves the content of the webpage.`,
     inputSchema: z.object({ url: z.string().url() }),
     outputSchema: z.string(),
   },

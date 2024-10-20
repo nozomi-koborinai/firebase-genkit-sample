@@ -20,7 +20,7 @@ export const analyzeWebContents = genkitFunctions.onFlow(
   async (input) => {
     const result = await generate({
       model: gemini15Flash,
-      prompt: `以下のウェブページの内容を分析してください。：${input}`,
+      prompt: `Analyze the content of the following webpage: ${input}`,
       tools: [webLoader],
       output: {
         format: `text`,
