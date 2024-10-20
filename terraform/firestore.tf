@@ -129,7 +129,7 @@ resource "google_firestore_database" "firestore" {
   type             = "FIRESTORE_NATIVE"
   concurrency_mode = "OPTIMISTIC"
 
-    # Wait for Firebase to be enabled in the Google Cloud project before initializing Firestore
+  # Wait for Firebase to be enabled in the Google Cloud project before initializing Firestore
   depends_on = [
     google_firebase_project.default,
   ]
