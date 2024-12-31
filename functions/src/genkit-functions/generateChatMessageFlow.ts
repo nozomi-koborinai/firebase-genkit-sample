@@ -1,27 +1,13 @@
-import { prompt } from '@genkit-ai/dotprompt'
 import { firebaseAuth } from '@genkit-ai/firebase/auth'
-import * as genkitFunctions from '@genkit-ai/firebase/functions'
+import { onFlow } from '@genkit-ai/firebase/functions'
 import { Timestamp } from 'firebase-admin/firestore'
-import * as z from 'zod'
-import { db, googleAIapiKey } from '../config/firebase'
+import { z } from 'genkit'
+import { ai, db, googleAIapiKey } from '../index'
 
-const chatInputSchema = z.object({
-  messages: z.array(
-    z.object({
-      createdAt: z.string(),
-      isUser: z.boolean(),
-      text: z.string(),
-    })
-  ),
-})
-
-export const generateChatMessage = genkitFunctions.onFlow(
+export const generateChatMessage = onFlow(
+  ai,
   {
     name: `generateChatMessage`,
-    httpsOptions: {
-      cors: true,
-      secrets: [googleAIapiKey],
-    },
     inputSchema: z.object({
       userId: z.string(),
       chatId: z.string(),
@@ -31,6 +17,10 @@ export const generateChatMessage = genkitFunctions.onFlow(
         throw new Error(`Only anonymously authenticated users can access this function`)
       }
     }),
+    httpsOptions: {
+      secrets: [googleAIapiKey],
+      cors: true,
+    },
   },
   async (input) => {
     try {
@@ -46,8 +36,8 @@ export const generateChatMessage = genkitFunctions.onFlow(
         text: doc.data().text,
       }))
 
-      const chatbotPrompt = await prompt<z.infer<typeof chatInputSchema>>(`chat`)
-      const result = await chatbotPrompt.generate({ input: { messages } })
+      const generateChatMessagePrompt = ai.prompt<z.ZodTypeAny, z.ZodTypeAny>(`generateChatMessage`)
+      const result = await generateChatMessagePrompt({ input: { messages } })
 
       await chatDoc.ref.collection(`messages`).add({
         createdAt: Timestamp.now(),
