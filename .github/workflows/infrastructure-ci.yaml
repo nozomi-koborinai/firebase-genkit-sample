@@ -3,7 +3,7 @@ name: CI for Terraform Plan
 on:
   pull_request:
     paths:
-      - 'terraform/**'
+      - "terraform/**"
     types:
       - opened
       - synchronize
@@ -25,8 +25,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v1'
+      - name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
         with:
           workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ env.SERVICE_ACCOUNT }}
@@ -50,5 +50,5 @@ jobs:
           -lock-timeout=120s 
           -var=project_id=${{ env.PROJECT_ID }} 
           -var=project_name=${{ env.PROJECT_ID }} 
-          -var=billing_account=${{ env.BILLING_ACCOUNT }} 
+          -var=billing_account=${{ env.BILLING_ACCOUNT }}
         working-directory: ./terraform
