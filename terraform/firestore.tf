@@ -19,8 +19,8 @@ locals {
         "userProfile" = {
           "mapValue" = {
             "fields" = {
-              "name"              = { "stringValue" = "田中太郎" }
-              "preferredLanguage" = { "stringValue" = "ja" }
+              "name"              = { "stringValue" = "John Smith" }
+              "preferredLanguage" = { "stringValue" = "en" }
               "accountType"       = { "stringValue" = "premium" }
             }
           }
@@ -34,8 +34,8 @@ locals {
         "userProfile" = {
           "mapValue" = {
             "fields" = {
-              "name"              = { "stringValue" = "田中次郎" }
-              "preferredLanguage" = { "stringValue" = "ja" }
+              "name"              = { "stringValue" = "Jane Doe" }
+              "preferredLanguage" = { "stringValue" = "en" }
               "accountType"       = { "stringValue" = "standard" }
             }
           }
@@ -56,7 +56,7 @@ locals {
                 "mapValue" = {
                   "fields" = {
                     "role"      = { "stringValue" = "user" }
-                    "content"   = { "stringValue" = "7 インチタブレットの大きさはどれくらいなのでしょうか？" }
+                    "content"   = { "stringValue" = "What are the dimensions of the 7-inch tablet?" }
                     "timestamp" = { "stringValue" = "2024-04-20T10:00:00Z" }
                   }
                 }
@@ -65,7 +65,7 @@ locals {
                 "mapValue" = {
                   "fields" = {
                     "role"      = { "stringValue" = "assistant" }
-                    "content"   = { "stringValue" = "7インチタブレットの大きさは、画面の対角線の長さが7インチ（約17.78 cm）であることを指します。" }
+                    "content"   = { "stringValue" = "The 7-inch tablet has a diagonal screen size of 7 inches (approximately 17.78 cm)." }
                     "timestamp" = { "stringValue" = "2024-04-20T10:00:05Z" }
                   }
                 }
@@ -87,7 +87,7 @@ locals {
                 "mapValue" = {
                   "fields" = {
                     "role"      = { "stringValue" = "user" }
-                    "content"   = { "stringValue" = "こんにちは" }
+                    "content"   = { "stringValue" = "Hello" }
                     "timestamp" = { "stringValue" = "2023-04-20T10:00:00Z" }
                   }
                 }
@@ -96,7 +96,7 @@ locals {
                 "mapValue" = {
                   "fields" = {
                     "role"      = { "stringValue" = "assistant" }
-                    "content"   = { "stringValue" = "はい、どのようなご質問でしょうか？" }
+                    "content"   = { "stringValue" = "Hi, how can I help you today?" }
                     "timestamp" = { "stringValue" = "2023-04-20T10:00:05Z" }
                   }
                 }
@@ -112,9 +112,9 @@ locals {
       collection  = "productCatalog"
       document_id = "tablet_1"
       fields = jsonencode({
-        "name"    = { "stringValue" = "タブレット_1" }
-        "details" = { "stringValue" = "軽量 7 インチタブレット" }
-        "price"   = { "integerValue" = "30000" }
+        "name"    = { "stringValue" = "Tablet_1" }
+        "details" = { "stringValue" = "Lightweight 7-inch tablet" }
+        "price"   = { "integerValue" = "299" }
       })
     }
   ]
