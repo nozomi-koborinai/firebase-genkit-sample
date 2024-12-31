@@ -16,7 +16,8 @@
     "esModuleInterop": true,
     "types": ["@types/node"],
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true
   },
   "compileOnSave": true,
   "exclude": ["node_modules", "lib"]
