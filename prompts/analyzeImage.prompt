@@ -1,0 +1,15 @@
+---
+model: googleai/gemini-2.0-flash-exp
+config:
+  temperature: 1.0
+input:
+  schema:
+    storageFileUrl: string
+output:
+  format: json
+  schema:
+    analysis: string
+---
+
+Describe the content of this image in detail and summarize its main features.
+{{media url=storageFileUrl}}
