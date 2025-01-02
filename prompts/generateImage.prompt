@@ -1,0 +1,14 @@
+---
+model: vertexai/imagen3
+config:
+  temperature: 0.7
+  sampleCount: 1
+input:
+  schema:
+    prompt: string
+output:
+  format: media
+---
+
+You are the world's best illustrator.
+Please generate an image of {{prompt}}.
