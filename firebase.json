@@ -1,7 +1,7 @@
 {
   "functions": [
     {
-      "source": "functions",
+      "source": ".",
       "codebase": "default",
       "ignore": [
         "node_modules",
@@ -25,21 +25,6 @@
     },
     "firestore": {
       "port": 8080
-    },
-    "database": {
-      "port": 9000
-    },
-    "hosting": {
-      "port": 5000
-    },
-    "pubsub": {
-      "port": 8085
-    },
-    "eventarc": {
-      "port": 9299
-    },
-    "tasks": {
-      "port": 9499
     },
     "ui": {
       "enabled": true

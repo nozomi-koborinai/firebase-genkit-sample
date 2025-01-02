@@ -68,4 +68,6 @@ node_modules/
 # dataconnect generated files
 .dataconnect
 
+lib
 .vscode
+.genkit

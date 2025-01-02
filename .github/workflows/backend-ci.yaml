@@ -3,7 +3,8 @@ name: CI for Cloud Run Functions on Firebase
 on:
   pull_request:
     paths:
-      - 'functions/**'
+      - 'prompts/**'
+      - 'src/**'
     types:
       - opened
       - synchronize
@@ -28,7 +29,8 @@ jobs:
         with:
           filters: |
             genkit_functions:
-              - 'functions/**'
+              - 'prompts/**'
+              - 'src/**'
 
   functions_ci:
     name: Cloud Run Functions CI
@@ -47,12 +49,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install Dependencies
         run: npm install
-        working-directory: ./functions
 
       - name: Check for linting errors
         run: npm run lint
-        working-directory: ./functions

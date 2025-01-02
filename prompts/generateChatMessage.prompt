@@ -1,5 +1,5 @@
 ---
-model: googleai/gemini-1.5-flash-latest
+model: googleai/gemini-2.0-flash-exp
 config:
   temperature: 0.7
 input:
@@ -32,8 +32,3 @@ When generating your response, please adhere to these guidelines:
 4. Analyze the user's sentiment from their messages and respond empathetically.
 
 Your goal is to generate friendly and effective responses that enhance user satisfaction while leveraging the chat history.
-
-Remember to format your response as a JSON object with the following structure:
-{
-  "response": "Your detailed response here",
-}
