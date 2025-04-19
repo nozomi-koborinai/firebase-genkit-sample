@@ -72,7 +72,7 @@ const webLoader = ai.defineTool(
  */
 export const analyzeWebContentsFlow = ai.defineFlow(
   {
-    name: `analyzeWebContentsFlow`,
+    name: `analyze-web-contents-flow`,
     inputSchema: z.object({
       url: z.string(),
     }),

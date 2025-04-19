@@ -16,30 +16,24 @@ import { googleAIapiKey } from './genkit'
  * └── generateImageFlow: Generates images using Vertex AI
  */
 
+const opts = { secrets: [googleAIapiKey], region: 'asia-northeast1', cors: true }
+
 export const analyzeImage = onCallGenkit(
-  {
-    secrets: [googleAIapiKey],
-  },
+  opts,
   analyzeImageFlow
 )
 
 export const analyzeWebContents = onCallGenkit(
-  {
-    secrets: [googleAIapiKey],
-  },
+  opts,
   analyzeWebContentsFlow
 )
 
 export const generateChatMessage = onCallGenkit(
-  {
-    secrets: [googleAIapiKey],
-  },
+  opts,
   generateChatMessageFlow
 )
 
 export const generateImage = onCallGenkit(
-  {
-    secrets: [googleAIapiKey],
-  },
+  opts,
   generateImageFlow
 )

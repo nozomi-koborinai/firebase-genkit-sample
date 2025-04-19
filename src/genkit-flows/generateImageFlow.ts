@@ -45,7 +45,7 @@ const generateImagePrompt = ai.prompt<z.ZodTypeAny, z.ZodTypeAny>(`generateImage
  */
 export const generateImageFlow = ai.defineFlow(
   {
-    name: `generateImageFlow`,
+    name: `generate-image-flow`,
     inputSchema: z.object({
       prompt: z.string(),
     }),

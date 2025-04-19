@@ -49,7 +49,7 @@ const generateChatMessagePrompt = ai.prompt<z.ZodTypeAny, z.ZodTypeAny>(`generat
  */
 export const generateChatMessageFlow = ai.defineFlow(
   {
-    name: `generateChatMessageFlow`,
+    name: `generate-chat-message-flow`,
     inputSchema: z.object({
       userId: z.string(),
       chatId: z.string(),

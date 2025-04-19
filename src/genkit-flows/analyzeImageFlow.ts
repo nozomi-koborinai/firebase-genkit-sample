@@ -44,7 +44,7 @@ const analyzeImagePrompt = ai.prompt<z.ZodTypeAny, z.ZodTypeAny>(`analyzeImage`)
  */
 export const analyzeImageFlow = ai.defineFlow(
   {
-    name: `analyzeImageFlow`,
+    name: `analyze-image-flow`,
     inputSchema: z.object({
       storageFileUrl: z.string(),
     }),
