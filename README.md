@@ -1,6 +1,6 @@
 # firebase-genkit-sample
 
-A sample project demonstrating AI applications using Firebase Cloud Run functions (2nd generation) and Genkit.
+A sample project demonstrating AI applications using Firebase Cloud Run functions (2nd generation) and Genkit 1.0.
 
 ## 🚀 Features
 
@@ -17,7 +17,7 @@ firebase-genkit-sample/
 │ └── workflows/          # CI/CD Pipelines sample
 ├── prompts/              # AI prompt templates
 ├── src/
-│ ├── genkit-functions/   # AI function implementations
+│ ├── genkit-flows/       # AI flow implementations
 │ ├── genkit.ts           # Genkit configuration
 │ └── index.ts            # Deploy Functions
 └── terraform/            # Terraform configuration for infrastructure setup (not directly related to Genkit, but used for setting up the overall Firebase project infrastructure)
@@ -58,6 +58,12 @@ genkit start -- firebase emulators:start --inspect-functions
 ```bash
 firebase deploy --only functions
 ```
+
+## 📝 Important Notes
+
+- This project uses Genkit 1.0, which has significant API changes from earlier versions
+- Flows are defined using `ai.defineFlow()` instead of the legacy `onFlow` method
+- Firebase Functions integration is done via `onCallGenkit`
 
 ## 📚 Articles
 
