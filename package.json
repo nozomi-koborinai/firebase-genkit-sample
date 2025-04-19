@@ -6,7 +6,7 @@
     "build:watch": "tsc --watch",
     "serve": "npm run build && firebase emulators:start --only auth,functions,firestore --import data --export-on-exit --project=dev",
     "shell": "npm run build && firebase functions:shell --project=dev",
-    "start": "npm run shell",
+    "start": "genkit start -o -- tsx --watch src/index.ts",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "cli:remoteconfig:publish": "npm run build && node -e 'require(\"./lib/cli/remoteConfig\").publish()'"
@@ -35,6 +35,7 @@
     "eslint-plugin-prettier": "^5.2.3",
     "firebase-functions-test": "^3.1.0",
     "genkit": "^1.6.0",
+    "genkit-cli": "^1.6.1",
     "prettier": "^3.5.3",
     "typescript": "^4.9.0"
   },
