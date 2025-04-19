@@ -14,6 +14,7 @@ enableGoogleCloudTelemetry()
 
 // API keys stored in Google Cloud Secret Manager
 export const googleAIapiKey = defineSecret(`GOOGLE_GENAI_API_KEY`)
+export const mapsApiKey = defineSecret(`GOOGLE_MAPS_API_KEY`)
 
 // Initialize Genkit
 export const ai = genkit({
