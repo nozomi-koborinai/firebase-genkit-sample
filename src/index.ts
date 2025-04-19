@@ -4,6 +4,7 @@ import { analyzeWebContentsFlow } from './genkit-flows/analyzeWebContentsFlow'
 import { generateChatMessageFlow } from './genkit-flows/generateChatMessageFlow'
 import { generateImageFlow } from './genkit-flows/generateImageFlow'
 import { googleAIapiKey } from './genkit'
+import { googleMapsFlow } from './genkit-flows/googleMapsFlow'
 
 /**
  * Export Cloud Run functions (2nd generation)
@@ -13,7 +14,8 @@ import { googleAIapiKey } from './genkit'
  * ├── analyzeImageFlow: Analyzes images using Google AI
  * ├── analyzeWebContentsFlow: Analyzes web content using Google AI
  * ├── generateChatMessageFlow: Generates chat responses using Google AI and Firestore
- * └── generateImageFlow: Generates images using Vertex AI
+ * ├── generateImageFlow: Generates images using Vertex AI
+ * └── googleMapsFlow: Uses Google Maps Platform via MCP client
  */
 
 const opts = { secrets: [googleAIapiKey], region: 'asia-northeast1', cors: true }
@@ -36,4 +38,9 @@ export const generateChatMessage = onCallGenkit(
 export const generateImage = onCallGenkit(
   opts,
   generateImageFlow
+)
+
+export const callGoogleMaps = onCallGenkit(
+  opts,
+  googleMapsFlow
 )
