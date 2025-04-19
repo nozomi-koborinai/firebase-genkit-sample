@@ -1,5 +1,4 @@
 import { mcpClient } from 'genkitx-mcp'
-import { mapsApiKey } from '../../genkit'
 
 export const mapsClient = mcpClient({
   name: 'maps',
@@ -8,7 +7,7 @@ export const mapsClient = mcpClient({
     args: ['-y', '@modelcontextprotocol/server-google-maps'],
     env: {
       ...process.env as Record<string, string>,
-      GOOGLE_MAPS_API_KEY: mapsApiKey.value(),
+    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY || '',
     },
   },
 })
