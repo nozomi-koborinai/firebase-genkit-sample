@@ -1,7 +1,5 @@
-import { firebaseAuth } from '@genkit-ai/firebase/auth'
-import { onFlow } from '@genkit-ai/firebase/functions'
 import { z } from 'genkit'
-import { ai, googleAIapiKey } from '../genkit'
+import { ai } from '../genkit'
 
 /**
  * Define image generation prompt using template from /prompts/generateImage.prompt
@@ -45,22 +43,13 @@ const generateImagePrompt = ai.prompt<z.ZodTypeAny, z.ZodTypeAny>(`generateImage
  * }
  * ```
  */
-export const generateImageFlow = onFlow(
-  ai,
+export const generateImageFlow = ai.defineFlow(
   {
     name: `generateImageFlow`,
     inputSchema: z.object({
       prompt: z.string(),
     }),
-    authPolicy: firebaseAuth((user) => {
-      if (user.firebase?.sign_in_provider !== `anonymous`) {
-        throw new Error(`Only anonymously authenticated users can access this function`)
-      }
-    }),
-    httpsOptions: {
-      secrets: [googleAIapiKey],
-      cors: true,
-    },
+    outputSchema: z.any(),
   },
   async (input) => {
     const { media } = await generateImagePrompt(input)

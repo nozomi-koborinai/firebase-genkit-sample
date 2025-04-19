@@ -6,45 +6,38 @@
     "build:watch": "tsc --watch",
     "serve": "npm run build && firebase emulators:start --only auth,functions,firestore --import data --export-on-exit --project=dev",
     "shell": "npm run build && firebase functions:shell --project=dev",
-    "start": "npm run shell",
+    "start": "genkit start -o -- tsx --watch src/index.ts",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "cli:remoteconfig:publish": "npm run build && node -e 'require(\"./lib/cli/remoteConfig\").publish()'"
   },
   "engines": {
-    "node": "20"
+    "node": "22"
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@genkit-ai/dotprompt": "^0.9.12",
-    "@genkit-ai/firebase": "^0.9.12",
-    "@genkit-ai/google-cloud": "^0.9.12",
-    "@genkit-ai/googleai": "^0.9.12",
-    "@genkit-ai/vertexai": "^0.9.12",
-    "axios": "^1.7.9",
-    "cheerio": "^1.0.0",
-    "dayjs": "^1.11.5",
-    "firebase-admin": "^12.0.0",
-    "firebase-functions": "^4.0.0",
-    "inversify": "^6.0.1",
-    "reflect-metadata": "^0.1.13",
-    "zod": "^3.23.8"
+    "@genkit-ai/google-cloud": "^1.6.2",
+    "@genkit-ai/googleai": "^1.6.2",
+    "@genkit-ai/vertexai": "^1.6.2",
+    "dotenv": "^16.4.7",
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^6.3.2",
+    "genkit": "^1.6.2"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.35",
-    "@types/node": "^18.11.9",
-    "@types/parse5": "^7.0.0",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^8.9.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "firebase-functions-test": "^0.2.0",
-    "prettier": "^2.7.1",
-    "typescript": "^5.6.3"
+    "eslint-plugin-prettier": "^5.2.3",
+    "firebase-functions-test": "^3.1.0",
+    "genkit": "^1.6.0",
+    "genkit-cli": "^1.6.1",
+    "prettier": "^3.5.3",
+    "typescript": "^4.9.0"
   },
   "private": true
 }

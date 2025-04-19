@@ -2,11 +2,9 @@
  * This code is inspired by tanabee/genkit-summarize-webpage
  * Repository: https://github.com/tanabee/genkit-summarize-webpage
  */
-import { firebaseAuth } from '@genkit-ai/firebase/auth'
-import { onFlow } from '@genkit-ai/firebase/functions'
-import * as cheerio from 'cheerio'
 import { z } from 'genkit'
-import { ai, googleAIapiKey } from '../genkit'
+import { ai } from '../genkit'
+import * as cheerio from 'cheerio'
 
 /**
  * Define web contents analysis prompt using template from /prompts/analyzeWebContents.prompt
@@ -72,8 +70,7 @@ const webLoader = ai.defineTool(
  *   },
  * }
  */
-export const analyzeWebContentsFlow = onFlow(
-  ai,
+export const analyzeWebContentsFlow = ai.defineFlow(
   {
     name: `analyzeWebContentsFlow`,
     inputSchema: z.object({
@@ -82,15 +79,6 @@ export const analyzeWebContentsFlow = onFlow(
     outputSchema: z.object({
       analysis: z.string(),
     }),
-    authPolicy: firebaseAuth((user) => {
-      if (user.firebase?.sign_in_provider !== `anonymous`) {
-        throw new Error(`Only anonymously authenticated users can access this function`)
-      }
-    }),
-    httpsOptions: {
-      secrets: [googleAIapiKey],
-      cors: true,
-    },
   },
   async (input) => {
     const { output } = await analyzeWebContentsPrompt(input, { tools: [webLoader] })
