@@ -1,3 +1,10 @@
+import { onCallGenkit } from 'firebase-functions/https'
+import { analyzeImageFlow } from './genkit-flows/analyzeImageFlow'
+import { analyzeWebContentsFlow } from './genkit-flows/analyzeWebContentsFlow'
+import { generateChatMessageFlow } from './genkit-flows/generateChatMessageFlow'
+import { generateImageFlow } from './genkit-flows/generateImageFlow'
+import { googleAIapiKey } from './genkit'
+
 /**
  * Export Cloud Run functions (2nd generation)
  * These functions are deployed to Cloud Run and accessible via HTTPS endpoints
@@ -9,7 +16,30 @@
  * └── generateImageFlow: Generates images using Vertex AI
  */
 
-export { analyzeImageFlow } from './genkit-functions/analyzeImageFlow'
-export { analyzeWebContentsFlow } from './genkit-functions/analyzeWebContentsFlow'
-export { generateChatMessageFlow } from './genkit-functions/generateChatMessageFlow'
-export { generateImageFlow } from './genkit-functions/generateImageFlow'
+export const analyzeImage = onCallGenkit(
+  {
+    secrets: [googleAIapiKey],
+  },
+  analyzeImageFlow
+)
+
+export const analyzeWebContents = onCallGenkit(
+  {
+    secrets: [googleAIapiKey],
+  },
+  analyzeWebContentsFlow
+)
+
+export const generateChatMessage = onCallGenkit(
+  {
+    secrets: [googleAIapiKey],
+  },
+  generateChatMessageFlow
+)
+
+export const generateImage = onCallGenkit(
+  {
+    secrets: [googleAIapiKey],
+  },
+  generateImageFlow
+)

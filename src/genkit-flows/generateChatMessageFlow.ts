@@ -1,8 +1,6 @@
-import { firebaseAuth } from '@genkit-ai/firebase/auth'
-import { onFlow } from '@genkit-ai/firebase/functions'
 import { getFirestore, Timestamp } from 'firebase-admin/firestore'
 import { z } from 'genkit'
-import { ai, googleAIapiKey } from '../genkit'
+import { ai } from '../genkit'
 
 /**
  * Define chat message generation prompt using template from /prompts/generateChatMessage.prompt
@@ -49,8 +47,7 @@ const generateChatMessagePrompt = ai.prompt<z.ZodTypeAny, z.ZodTypeAny>(`generat
  *   }
  * }
  */
-export const generateChatMessageFlow = onFlow(
-  ai,
+export const generateChatMessageFlow = ai.defineFlow(
   {
     name: `generateChatMessageFlow`,
     inputSchema: z.object({
@@ -60,15 +57,6 @@ export const generateChatMessageFlow = onFlow(
     outputSchema: z.object({
       response: z.string(),
     }),
-    authPolicy: firebaseAuth((user) => {
-      if (user.firebase?.sign_in_provider !== `anonymous`) {
-        throw new Error(`Only anonymously authenticated users can access this function`)
-      }
-    }),
-    httpsOptions: {
-      secrets: [googleAIapiKey],
-      cors: true,
-    },
   },
   async (input) => {
     try {
