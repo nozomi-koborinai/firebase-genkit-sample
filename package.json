@@ -12,7 +12,7 @@
     "cli:remoteconfig:publish": "npm run build && node -e 'require(\"./lib/cli/remoteConfig\").publish()'"
   },
   "engines": {
-    "node": "20"
+    "node": "22"
   },
   "main": "lib/index.js",
   "dependencies": {
