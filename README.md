@@ -8,6 +8,7 @@ A sample project demonstrating AI applications using Firebase Cloud Run function
 - Web Content Analysis (Google AI)
 - Chat Message Generation (Google AI & Firestore)
 - Image Generation (Vertex AI)
+- Google Maps Integration (via Genkit MCP)
 
 ## 📁 Project Structure
 
@@ -18,6 +19,8 @@ firebase-genkit-sample/
 ├── prompts/              # AI prompt templates
 ├── src/
 │ ├── genkit-flows/       # AI flow implementations
+│ ├── mcp/
+│ │ └── client/           # MCP client implementations
 │ ├── genkit.ts           # Genkit configuration
 │ └── index.ts            # Deploy Functions
 └── terraform/            # Terraform configuration for infrastructure setup (not directly related to Genkit, but used for setting up the overall Firebase project infrastructure)
@@ -43,14 +46,13 @@ npm install
 export GCLOUD_PROJECT="your-google-cloud-project-id"
 export GOOGLE_GENAI_API_KEY="your-api-key"
 export GENKIT_ENV="dev"
+export GOOGLE_MAPS_API_KEY="your-maps-api-key"
 ```
 
 3. Start Genkit emulator for development
 
 ```bash
-genkit start -- npx tsx --watch src/index.ts
-or
-genkit start -- firebase emulators:start --inspect-functions
+npm start
 ```
 
 4. Deploy to Cloud Run functions (2nd generation)
