@@ -18,10 +18,6 @@ export const mapsApiKey = defineSecret(`GOOGLE_MAPS_API_KEY`)
 
 // Initialize Genkit
 export const ai = genkit({
-  plugins: [
-    googleAI(),
-    vertexAI(),
-    mapsClient,
-  ],
+  plugins: [googleAI(), vertexAI(), mapsClient],
   model: gemini25FlashPreview0417,
 })

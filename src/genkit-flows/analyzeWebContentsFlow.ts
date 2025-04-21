@@ -58,7 +58,7 @@ export const analyzeWebContentsFlow = ai.defineFlow(
     }),
   },
   async (input) => {
-    const { output } = await analyzeWebContentsPrompt(input, { tools: [ webLoader ] })
+    const { output } = await analyzeWebContentsPrompt(input, { tools: [webLoader] })
     return output
   }
 )

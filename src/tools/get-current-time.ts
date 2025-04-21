@@ -1,10 +1,10 @@
-import { ai } from '../genkit';
-import { z } from 'zod';
+import { ai } from '../genkit'
+import { z } from 'zod'
 
 export const getCurrentTime = ai.defineTool(
   {
-    name: 'getCurrentTime',
-    description: 'Get the current time.',
+    name: `getCurrentTime`,
+    description: `Get the current time.`,
     inputSchema: z.object({
       text: z.string(),
     }),
@@ -13,9 +13,9 @@ export const getCurrentTime = ai.defineTool(
     }),
   },
   async ({ text }) => {
-    const now = new Date();
+    const now = new Date()
     return {
-      time: now.toLocaleTimeString('ja-JP'),
-    };
+      time: now.toLocaleTimeString(`ja-JP`),
+    }
   }
-); 
+)
