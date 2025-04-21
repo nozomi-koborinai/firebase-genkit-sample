@@ -4,7 +4,7 @@
  */
 import { z } from 'genkit'
 import { ai } from '../genkit'
-import * as cheerio from 'cheerio'
+import { webLoader } from '../tools/web-loader'
 
 /**
  * Define web contents analysis prompt using template from /prompts/analyzeWebContents.prompt
@@ -19,29 +19,6 @@ import * as cheerio from 'cheerio'
  *         └── analysis: string
  */
 const analyzeWebContentsPrompt = ai.prompt<z.ZodTypeAny, z.ZodTypeAny>(`analyzeWebContents`)
-
-/**
- * Custom tool for web content extraction
- * Fetches webpage content and cleans up HTML, focusing on main content
- */
-const webLoader = ai.defineTool(
-  {
-    name: `webLoader`,
-    description: `Accesses the specified URL and retrieves the content of the webpage.`,
-    inputSchema: z.object({ url: z.string().url() }),
-    outputSchema: z.string(),
-  },
-  async ({ url }) => {
-    const res = await fetch(url)
-    const html = await res.text()
-    const $ = cheerio.load(html)
-    $(`script, style, noscript`).remove()
-    if ($(`article`).length) {
-      return $(`article`).text()
-    }
-    return $(`body`).text()
-  }
-)
 
 /**
  * Genkit function running on Cloud Run functions (2nd generation)
@@ -81,7 +58,7 @@ export const analyzeWebContentsFlow = ai.defineFlow(
     }),
   },
   async (input) => {
-    const { output } = await analyzeWebContentsPrompt(input, { tools: [webLoader] })
+    const { output } = await analyzeWebContentsPrompt(input, { tools: [ webLoader ] })
     return output
   }
 )
