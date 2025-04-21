@@ -5,8 +5,8 @@ import { generateChatMessageFlow } from './genkit-flows/generateChatMessageFlow'
 import { generateImageFlow } from './genkit-flows/generateImageFlow'
 import { googleAIapiKey } from './genkit'
 import { googleMapsFlow } from './genkit-flows/googleMapsFlow'
-import { genkitMCP } from './mcp/server/genkit-mcp-server'
-import { getCurrentTime } from './tools/get-current-time'
+// import { genkitMCP } from './mcp/server/genkit-mcp-server'
+// import { getCurrentTime } from './tools/get-current-time'
 
 /**
  * Export Cloud Run functions (2nd generation)
@@ -20,33 +20,18 @@ import { getCurrentTime } from './tools/get-current-time'
  * └── googleMapsFlow: Uses Google Maps Platform via MCP client
  */
 
-const opts = { secrets: [googleAIapiKey], region: 'asia-northeast1', cors: true }
+const opts = { secrets: [googleAIapiKey], region: `asia-northeast1`, cors: true }
 
-export const analyzeImage = onCallGenkit(
-  opts,
-  analyzeImageFlow
-)
+export const analyzeImage = onCallGenkit(opts, analyzeImageFlow)
 
-export const analyzeWebContents = onCallGenkit(
-  opts,
-  analyzeWebContentsFlow
-)
+export const analyzeWebContents = onCallGenkit(opts, analyzeWebContentsFlow)
 
-export const generateChatMessage = onCallGenkit(
-  opts,
-  generateChatMessageFlow
-)
+export const generateChatMessage = onCallGenkit(opts, generateChatMessageFlow)
 
-export const generateImage = onCallGenkit(
-  opts,
-  generateImageFlow
-)
+export const generateImage = onCallGenkit(opts, generateImageFlow)
 
-export const callGoogleMaps = onCallGenkit(
-  opts,
-  googleMapsFlow
-)
+export const callGoogleMaps = onCallGenkit(opts, googleMapsFlow)
 
-export { getCurrentTime }
+// export { getCurrentTime }
 
-export { genkitMCP }
+// export { genkitMCP }

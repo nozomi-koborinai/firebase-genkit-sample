@@ -1,5 +1,5 @@
-import { ai } from '../genkit';
-import { z } from 'zod';
+import { ai } from '../genkit'
+import { z } from 'zod'
 import * as cheerio from 'cheerio'
 
 export const webLoader = ai.defineTool(
