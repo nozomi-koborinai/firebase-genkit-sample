@@ -5,6 +5,8 @@ import { generateChatMessageFlow } from './genkit-flows/generateChatMessageFlow'
 import { generateImageFlow } from './genkit-flows/generateImageFlow'
 import { googleAIapiKey } from './genkit'
 import { googleMapsFlow } from './genkit-flows/googleMapsFlow'
+import { genkitMCP } from './mcp/server/genkit-mcp-server'
+import { getCurrentTime } from './tools/get-current-time'
 
 /**
  * Export Cloud Run functions (2nd generation)
@@ -44,3 +46,7 @@ export const callGoogleMaps = onCallGenkit(
   opts,
   googleMapsFlow
 )
+
+export { getCurrentTime }
+
+export { genkitMCP }
