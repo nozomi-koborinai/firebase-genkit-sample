@@ -9,6 +9,7 @@ A sample project demonstrating AI applications using Firebase Cloud Run function
 - Chat Message Generation (Google AI & Firestore)
 - Image Generation (Vertex AI)
 - Google Maps Integration (via Genkit MCP)
+- Genkit MCP Server Sample
 
 ## 📁 Project Structure
 
@@ -18,11 +19,13 @@ firebase-genkit-sample/
 │ └── workflows/          # CI/CD Pipelines sample
 ├── prompts/              # AI prompt templates
 ├── src/
-│ ├── genkit-flows/       # AI flow implementations
+│ ├── genkit-flows/       # AI flow implementations (e.g., analyzeImageFlow)
 │ ├── mcp/
-│ │ └── client/           # MCP client implementations
-│ ├── genkit.ts           # Genkit configuration
-│ └── index.ts            # Deploy Functions
+│ │ ├── client/           # MCP client implementations (e.g., mapsClient)
+│ │ └── server/           # MCP server implementations (e.g., genkitMCP)
+│ ├── tools/              # Custom Genkit tools (e.g., getCurrentTime, webLoader)
+│ ├── genkit.ts           # Genkit secrets/telemetry/logging configuration
+│ └── index.ts            # Firebase Functions deployment entry point
 └── terraform/            # Terraform configuration for infrastructure setup (not directly related to Genkit, but used for setting up the overall Firebase project infrastructure)
 ```
 
