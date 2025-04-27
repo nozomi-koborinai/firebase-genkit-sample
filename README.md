@@ -1,6 +1,6 @@
-# firebase-genkit-sample
+# genkit-sample
 
-A sample project demonstrating AI applications using Firebase Cloud Run functions (2nd generation) and Genkit 1.0.
+A sample project demonstrating AI applications using Firebase Cloud Run functions (2nd generation) and Genkit v1.x.x
 
 ## 🚀 Features
 
@@ -64,12 +64,6 @@ npm start
 firebase deploy --only functions
 ```
 
-## 📝 Important Notes
-
-- This project uses Genkit 1.0, which has significant API changes from earlier versions
-- Flows are defined using `ai.defineFlow()` instead of the legacy `onFlow` method
-- Firebase Functions integration is done via `onCallGenkit`
-
 ## 📚 Articles
 
 ### English
@@ -77,9 +71,13 @@ firebase deploy --only functions
 - [Orchestrating Firebase and AI: 8 Genkit Architecture Patterns](https://medium.com/@nozomi-koborinai/orchestrating-firebase-and-ai-8-genkit-architecture-patterns-12e44db40345)
 - [How to Develop Firebase Genkit Functions](https://medium.com/@nozomi-koborinai/how-to-develop-firebase-genkit-functions-2677b386a227)
 - [Getting Started with AI Image Generation Apps on Flutter, Genkit, and Imagen 3](https://medium.com/@nozomi-koborinai/getting-started-with-ai-image-generation-apps-on-flutter-genkit-and-imagen-3-9a83c63cbdf3)
+- [Extending Your AI Application with Genkit MCP](https://medium.com/@nozomi-koborinai/extending-your-ai-application-with-genkit-mcp-475d7533ca9e)
+- [Genkit vs Agent Development Kit (ADK): Choosing the Right Google‑Backed AI Framework](https://medium.com/@nozomi-koborinai/genkit-vs-agent-development-kit-adk-choosing-the-right-google-backed-ai-framework-1744b73234ac)
 
 ### Japanese
 
 - [Firebase & AI のオーケストレーションを実現！Genkit アーキテクチャ 8 選](https://zenn.dev/nozomi_cobo/articles/genkit-architecture)
 - [Firebase Genkit Functions 開発のすゝめ](https://zenn.dev/nozomi_cobo/articles/genkit-emulator-suite)
 - [Flutter × Genkit × Imagen 3 で始める AI 画像生成アプリ開発入門](https://zenn.dev/nozomi_cobo/articles/flutter-genkit-imagen)
+- [Genkit MCP を使った AI アプリケーションの外部拡張](https://zenn.dev/nozomi_cobo/articles/start-genkit-mcp)
+- [Genkit vs Agent Development Kit (ADK): Google 製 AI フレームワークの違いと使い分け](https://zenn.dev/nozomi_cobo/articles/genkit-agent-development-kit)
