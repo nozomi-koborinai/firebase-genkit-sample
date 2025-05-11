@@ -13,8 +13,8 @@ export const helloGenkitFlow = ai.defineFlow(
         temperature: 1,
         safetySettings: [
           {
-            category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
-            threshold: 'BLOCK_LOW_AND_ABOVE',
+            category: `HARM_CATEGORY_DANGEROUS_CONTENT`,
+            threshold: `BLOCK_LOW_AND_ABOVE`,
           }
         ]
       }),
