@@ -1,9 +1,14 @@
+![genkit-logo-dark](https://github.com/user-attachments/assets/e2fcf30c-4b59-4040-9692-78ec787fae3d#gh-dark-mode-only 'Genkit')
+![genkit-logo](https://github.com/user-attachments/assets/4875ba20-032b-4055-bc0f-9e4241a9e40b#gh-light-mode-only 'Genkit')
+
 # genkit-sample
 
-A sample project demonstrating AI applications using Firebase Cloud Run functions (2nd generation) and Genkit v1.x.x
+A sample project demonstrating AI applications using Firebase Cloud Run functions (2nd generation) and Genkit v1.8.0. 
+This sample specifically utilizes the **Genkit JS SDK**. Genkit also offers SDKs for Go and Python, which are not covered in this particular project.
 
 ## 🚀 Features
 
+- Basic Genkit Flow Example (helloGenkitFlow)
 - Image Analysis (Google AI)
 - Web Content Analysis (Google AI)
 - Chat Message Generation (Google AI & Firestore)
@@ -19,7 +24,7 @@ firebase-genkit-sample/
 │ └── workflows/          # CI/CD Pipelines sample
 ├── prompts/              # AI prompt templates
 ├── src/
-│ ├── genkit-flows/       # AI flow implementations (e.g., analyzeImageFlow)
+│ ├── genkit-flows/       # AI flow implementations (e.g., analyzeImageFlow, helloGenkitFlow)
 │ ├── mcp/
 │ │ ├── client/           # MCP client implementations (e.g., mapsClient)
 │ │ └── server/           # MCP server implementations (e.g., genkitMCP)
@@ -63,6 +68,8 @@ npm start
 ```bash
 firebase deploy --only functions
 ```
+
+(Note: While this example focuses on Cloud Run functions for Firebase (2nd Gen), Genkit flows are highly portable. They can be deployed to various Node.js environments, including Google Cloud Run directly, or any other platform that supports Node.js execution.)
 
 ## 📚 Articles
 
