@@ -1,6 +1,10 @@
+![genkit-logo-dark](https://github.com/user-attachments/assets/e2fcf30c-4b59-4040-9692-78ec787fae3d#gh-dark-mode-only 'Genkit')
+![genkit-logo](https://github.com/user-attachments/assets/4875ba20-032b-4055-bc0f-9e4241a9e40b#gh-light-mode-only 'Genkit')
+
 # genkit-sample
 
-A sample project demonstrating AI applications using Firebase Cloud Run functions (2nd generation) and Genkit v1.x.x
+A sample project demonstrating AI applications using Firebase Cloud Run functions (2nd generation) and Genkit v1.8.0. 
+This sample specifically utilizes the **Genkit JS SDK**. Genkit also offers SDKs for Go and Python, which are not covered in this particular project.
 
 ## 🚀 Features
 
